@@ -1,7 +1,7 @@
 require "csv"
 
 module Fluent
-  class ResolvFilter < Filter
+  class ProtocolsFilter < Filter
     Plugin.register_filter('protocols', self)
 
     config_param :database_path, :string, :default => File.dirname(__FILE__) + '/../../../protocolslist/service-names-port-numbers.csv'

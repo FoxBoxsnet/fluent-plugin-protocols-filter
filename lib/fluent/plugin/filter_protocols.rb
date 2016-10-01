@@ -32,8 +32,8 @@ module Fluent
     def getproto(port, proto)
           CSV.open(@database_path,"r") do |csv|
           csv.each do |row|
-            if row[1] == port
-              if row[2] == proto
+            if row[1] == port then
+              if row[2] == proto then
                  return row[0]
               end
             end

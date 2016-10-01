@@ -28,7 +28,7 @@ module Fluent
               if row[1] == [@key_port] then
                 if row[2] == [@key_proto] then
                   filtered_record = row[0]
-                  new_es.add(time, record)
+                  new_es.add(time, filtered_record)
                 end
               end
             end

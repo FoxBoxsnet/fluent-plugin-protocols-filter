@@ -29,14 +29,12 @@ module Fluent
       return new_es
     end
 
-
     def getprotocolname(port, protocol)
       CSV.open(@database_path,"r") do |csv|
         csv.each do |row|
           if row[1] == port
             if row[2] == protocol
               return row[0]
-              print row[0]
             end
           end
         end

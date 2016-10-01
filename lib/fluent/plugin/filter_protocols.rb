@@ -23,16 +23,8 @@ module Fluent
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-          CSV.open(@database_path,"r") do |csv|
-            csv.each do |row|
-              if row[1] == [@key_port] then
-                if row[2] == [@key_proto] then
-                  filtered_record = row[0]
-                  new_es.add(time, filtered_record)
-                end
-              end
-            end
-          end
+        record[@key_prefix] = Resolv.getname(record[@key_name]) rescue nil
+        new_es.add(time, record)
       end
       return new_es
     end

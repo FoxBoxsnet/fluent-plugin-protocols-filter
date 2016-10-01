@@ -28,11 +28,11 @@ module Fluent
             if row[1] == [@key_port]
               if row[2] == [@key_proto]
                 record[@key_prefix] = row[0]
+                new_es.add(time, record)
               end
             end
           end
         end
-        new_es.add(time, record)
       end
       return new_es
     end

@@ -23,10 +23,25 @@ module Fluent
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-        record[@key_prefix] = Resolv.getname(record[@key_name]) rescue nil
+        record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto])
         new_es.add(time, record)
       end
       return new_es
     end
+
+
+    def getprotocolname(port, protocol)
+      CSV.open(@database_path,"r") do |csv|
+        csv.each do |row|
+          if row[1] == port
+            if row[2] == protocol
+              return row[0]
+              print row[0]
+            end
+          end
+        end
+      end
+    end
+
   end
 end

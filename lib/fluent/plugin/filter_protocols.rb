@@ -1,4 +1,3 @@
-require "fluent/plugin/protocols/service-names-port-numbers.csv"
 require "csv"
 
 module Fluent

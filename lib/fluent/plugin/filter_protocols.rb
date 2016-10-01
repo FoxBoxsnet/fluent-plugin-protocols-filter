@@ -23,23 +23,18 @@ module Fluent
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-        record[@key_prefix] = getdes(@key_port, @key_proto)
+        CSV.open(@database_path,"r") do |csv|
+          csv.each do |row|
+            if row[1] == [@key_port]
+              if row[2] == [@@key_proto]
+                record[@key_prefix] = row[0]
+              end
+            end
+          end
+        end
         new_es.add(time, record)
       end
       return new_es
     end
-
-    def getdes(port,protocol)
-      CSV.open(@database_path,"r") do |csv|
-        csv.each do |row|
-          if row[1] == port
-            if row[2] == protocol
-              return row[0]
-            end
-          end
-        end
-      end
-    end
-
   end
 end

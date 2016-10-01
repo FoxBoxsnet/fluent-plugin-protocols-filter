@@ -26,7 +26,7 @@ module Fluent
         CSV.open(@database_path,"r") do |csv|
           csv.each do |row|
             if row[1] == [@key_port]
-              if row[2] == [@@key_proto]
+              if row[2] == [@key_proto]
                 record[@key_prefix] = row[0]
               end
             end

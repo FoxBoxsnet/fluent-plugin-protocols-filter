@@ -25,8 +25,8 @@ module Fluent
       es.each do |time,record|
         unless record[@key_port]
           record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue nil
-          new_es.add(time, record)
         end
+          new_es.add(time, record)
       end
       return new_es
     end

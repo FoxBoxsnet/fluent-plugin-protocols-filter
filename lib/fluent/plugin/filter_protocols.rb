@@ -23,7 +23,7 @@ module Fluent
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-        unless
+        unless record[@key_port]
           record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue nil
           new_es.add(time, record)
         end

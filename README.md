@@ -22,7 +22,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+<filter log.**>
+  @type protocols
+  key_port dest_port
+  key_proto proto
+  key_prefix des
+</filter>
+```
++ `key_port` : port unber
++ `key_proto` : `TCP`, `UDP`
++ `key_prefix` : `key_port` + `key_prefix` add field
 
 ## Development
 

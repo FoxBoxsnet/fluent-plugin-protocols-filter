@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-protocols-filter"
   spec.version       = "0.0.1"
   spec.authors       = ["Tokyo Home SOC"]
-  spec.email         = ["github@airforon.com"]
+  spec.email         = ["github@homesoc.tokyo"]
 
   spec.summary       = %q{Converts the protocol name protocol number.}
   spec.description   = %q{Converts the protocol name protocol number.}

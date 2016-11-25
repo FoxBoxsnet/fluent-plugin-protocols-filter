@@ -17,14 +17,16 @@ module Fluent
       @key_prefix    = @key_port + "_" + @key_prefix
     end
 
-    def filter_stream(tag, es)
+    def filter(tag, es)
       new_es = MultiEventStream.new
       tag = tag.sub(@remove_prefix, '') if @remove_prefix
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-        record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto])
-        new_es.add(time, record)
+        unless record[@key_port]
+          record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue nil
+        end
+          new_es.add(time, record)
       end
       return new_es
     end

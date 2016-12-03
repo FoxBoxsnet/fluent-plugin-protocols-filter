@@ -1,8 +1,8 @@
 require "csv"
 
-module Fluent
+module Fluent::Plugin
   class ProtocolsFilter < Filter
-    Plugin.register_filter('protocols', self)
+    Fluent::Plugin.register_filter('protocols', self)
 
     config_param :database_path, :string, :default => File.dirname(__FILE__) + '/../../../protocolslist/service-names-port-numbers.csv'
     config_param :key_port,      :string, :default => 'port'
@@ -17,12 +17,12 @@ module Fluent
       @key_prefix    = @key_port + "_" + @key_prefix
     end
 
-    def filter(tag, es)
-      new_es = MultiEventStream.new
+    def filter_stream(tag, es)
+      new_es = Fluent::MultiEventStream.new
       tag = tag.sub(@remove_prefix, '') if @remove_prefix
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
-      es.each do |time,record|
+      es.each do |time, record|
         unless record[@key_port]
           record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue nil
         end
@@ -42,6 +42,5 @@ module Fluent
         end
       end
     end
-
   end
 end

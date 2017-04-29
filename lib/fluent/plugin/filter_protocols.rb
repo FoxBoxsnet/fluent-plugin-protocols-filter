@@ -24,7 +24,7 @@ module Fluent::Plugin
 
       es.each do |time, record|
         unless record[@key_port].nil?
-          record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue nil
+          record[@key_prefix] = getprotocolname(record[@key_port], record[@key_proto]) rescue "unknown"
         end
           new_es.add(time, record)
       end

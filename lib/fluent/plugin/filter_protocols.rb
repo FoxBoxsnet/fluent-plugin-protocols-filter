@@ -1,6 +1,6 @@
 require "csv"
 
-module Fluent::Plugin
+module Fluent
   class ProtocolsFilter < Filter
     Fluent::Plugin.register_filter('protocols', self)
 

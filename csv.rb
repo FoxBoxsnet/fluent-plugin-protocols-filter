@@ -1,15 +1,26 @@
 require "csv"
 
-print "Enter the key port number :"
-port     = (gets.to_s).chomp
-print "Enter the key protocol (tcp or udp) :"
-protocol = (gets.to_s).chomp
-CSV.open("service-names-port-numbers.csv","r") do |csv|
-	csv.each do |row|
+@db = CSV.read("./protocolslist/service-names-port-numbers.csv", headers: false)
+
+
+
+def getprotocolname(port, protocol)
+	@db.each do |row|
 		if row[1] == port
-			if row[2] == protocol
-				print row[0]
+			if row[2] == protocol.downcase
+				 @service_name = row[0]
 			end
 		end
 	end
+
+	if @service_name then
+		return @service_name
+	else
+		return 'unknown'
+	end
 end
+
+p getprotocolname('4', 'tcp')
+p getprotocolname('23', 'tcp')
+p getprotocolname('23', 'tcp')
+p getprotocolname('23', 'tcp')
